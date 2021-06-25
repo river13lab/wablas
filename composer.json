@@ -1,0 +1,17 @@
+{
+    "name": "river13lab/wablas",
+    "description": "Sending WA message with https://wablas.com",
+    "type": "library",
+    "authors": [
+        {
+            "name": "river13lab",
+            "email": "river13lab@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "River13Lab\\WaBlas\\": "src/" 
+        } 
+    }
+}
