@@ -43,6 +43,40 @@ class WaBlas
         $result = curl_exec($curl);
         curl_close($curl);
     }
+	
+	function sendBulkText($phones, $message)
+    {
+        $curl = curl_init();
+        $token = $this->token;
+        $payload = [
+			"data" => [
+				foreach($phones as $phone)
+				{
+					[
+						'phone' => $phone,
+						'message' => $message,
+						'secret' => false, // or true
+						'priority' => false, // or true
+					],
+				}
+			]
+        ];
+
+        curl_setopt($curl, CURLOPT_HTTPHEADER,
+            array(
+                "Authorization: $token",
+				"Content-Type: application/json"
+            )
+        );
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload));
+        curl_setopt($curl, CURLOPT_URL, $this->domain."/api/v2/send-bulk/text");
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+        $result = curl_exec($curl);
+        curl_close($curl);
+    }
 
     function sendImage($phone, $image, $caption = null)
     {
