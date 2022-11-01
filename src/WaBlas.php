@@ -49,18 +49,19 @@ class WaBlas
         $curl = curl_init();
         $token = $this->token;
 		$random = true;
+        $data = [];
+        foreach($phones as $phone)
+        {
+            array_push($data, [
+                'phone' => $phone,
+                'message' => $message,
+                'secret' => false, 
+                'priority' => false, 
+            ]);            
+        }
+
         $payload = [
-			"data" => [
-				foreach($phones as $phone)
-				{
-					[
-						'phone' => $phone,
-						'message' => $message,
-						'secret' => false, // or true
-						'priority' => false, // or true
-					],
-				}
-			]
+			"data" => $data
         ];
 
         curl_setopt($curl, CURLOPT_HTTPHEADER,
