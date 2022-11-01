@@ -48,6 +48,7 @@ class WaBlas
     {
         $curl = curl_init();
         $token = $this->token;
+		$random = true;
         $payload = [
 			"data" => [
 				foreach($phones as $phone)
